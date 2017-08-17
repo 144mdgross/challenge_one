@@ -21,7 +21,7 @@ app.use('/random', random)
 
 // catch all config for Single Page App structure
 app.use('*', function(req, res, next) {
-  res.sendFile('index.html', {root: path.join(__dirname, '../public')})
+  res.sendFile('index.html', {root: path.join(__dirname, 'public')})
 })
 
 
