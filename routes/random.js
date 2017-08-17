@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const request = require('request');
+const fetch = require('node-fetch')
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 // list of words to do random query to tenor gifs
@@ -12,13 +12,13 @@ router.get('/', (req, res, next) => {
   let randomQuery = randomSearch[Math.floor(Math.random() * randomSearch.length)]
 
 // request Tenor gifs api for random result
-  request(`https://api.tenor.com/v1/search?q=${randomQuery}&key=${process.env.TENOR_API_KEY}`, (err, response, body) => {
-
-      console.error('error', err);
-      console.log('statusCode', response && response.statusCode);
-      console.log('body', body);
-    res.send(body)
-  })
+  fetch(`https://api.tenor.com/v1/search?q=${randomQuery}&key=${process.env.TENOR_API_KEY}`)
+    .then(resp => resp.json())
+    .then(body => {
+      let gif = body.results[0]
+      res.json({ gif })
+    })
+      .catch(err => console.log(err))
 });
 
 module.exports = router;

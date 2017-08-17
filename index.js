@@ -1,8 +1,12 @@
 const express = require('express')
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express()
+
+//allows react front end to reqest w/o cors issues b/c of proxy
+app.use(cors())
 
 app.use(bodyParser.json());
 
@@ -14,18 +18,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 
 // request trending gifs when component mounts
-app.use('/gifs', gifs)
+app.use('/api/gifs', gifs)
 
 // request a random gif
-app.use('/random', random)
+app.use('/api/random', random)
 
 // catch all config for Single Page App structure
 app.use('*', function(req, res, next) {
   res.sendFile('index.html', {root: path.join(__dirname, 'public')})
 })
 
-// changes port to 3001 to avoid conflict with create-react-app
-const port = process.env.PORT || 5000
+// changes port to 3002 to avoid conflict with create-react-app
+// see proxy in package.json for react app
+const port = process.env.PORT || 3002
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
