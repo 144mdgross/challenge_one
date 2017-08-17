@@ -24,8 +24,8 @@ app.use('*', function(req, res, next) {
   res.sendFile('index.html', {root: path.join(__dirname, 'public')})
 })
 
-
-const port = process.env.PORT || 3000
+// changes port to 3001 to avoid conflict with create-react-app
+const port = process.env.PORT || 3001
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
