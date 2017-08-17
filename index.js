@@ -25,7 +25,7 @@ app.use('*', function(req, res, next) {
 })
 
 // changes port to 3001 to avoid conflict with create-react-app
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 5000
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
