@@ -1,4 +1,10 @@
 import React from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  browserHistory,
+  Link
+} from 'react-router-dom';
 
 const Button = () => {
   return (
@@ -8,14 +14,14 @@ const Button = () => {
           <div className="row">
             <div className="col-sm-12">
               <div className="btn-group btn-group-justified">
-                <a href="#" className="btn btn-default">
+                <Link to="/" className="btn btn-default">
                   <span className="glyphicon glyphicon-list"></span>
                   See All
-                </a>
-                <a href="#" className="btn btn-primary">
+                </Link>
+                <Link to="/random" className="btn btn-primary">
                   <span className="glyphicon glyphicon-random"></span>
                   Random
-                </a>
+                </Link>
               </div>
             </div>
           </div>
