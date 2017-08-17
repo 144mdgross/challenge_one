@@ -6,3 +6,5 @@ app.yaml
 .DS_Store
 .idea
 /_
+
+.env
