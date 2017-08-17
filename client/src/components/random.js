@@ -6,7 +6,8 @@ class Random extends Component {
   constructor() {
     super()
     this.state = {
-      gif: null
+      gif: null,
+      loading: true
     }
   }
 
@@ -17,8 +18,9 @@ class Random extends Component {
        dataType: 'json',
        success: (result) => {
          console.log('result', result);
-         this.setState({ gif: result.gif.url });
+         this.setState({ gif: result.gif.media[0].gif.url });
          console.log(this.state.gif);
+         this.setState({ loading: false })
        },
        error: function(err) {
          console.log(err);
@@ -30,6 +32,7 @@ class Random extends Component {
     return (
       <div>
         <h1> Welcome Random </h1>
+        <img src={this.state.gif} />
       </div>
     )
   }
