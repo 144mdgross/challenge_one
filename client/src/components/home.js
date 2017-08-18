@@ -7,7 +7,7 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      gifs: [],
+      gifs: null,
       content1: [],
       content2: [],
       loading: true,
@@ -17,23 +17,25 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount called');
+    // declare arrays here to avoid altering state outside of this.setState()
+    let content1 = []
+    let content2 = []
+
     $.ajax({
        method:'get',
        url: `/api/gifs`,
        dataType: 'json',
        success: (result) => {
-         console.log('result', result.gifs);
-         this.setState({ gifs: result.gifs });
+
          for (let i = 0; i < result.gifs.length; i++) {
            if(i < this.state.pageItems) {
-             this.state.content1.push(<img key={i} src={this.state.gifs[i].media[0].gif.url}/>)
-
+             content1.push(<img key={i} src={result.gifs[i].media[0].gif.url}/>)
            } else {
-             this.state.content2.push(<img key={i} src={this.state.gifs[i].media[0].gif.url}/>)
+             content2.push(<img key={i} src={result.gifs[i].media[0].gif.url}/>)
            }
           }
-          this.setState({loading: false})
+          // set state in success to have access to result object in success function
+          this.setState({ content1, content2, gifs: result.gifs, loading: false })
        },
        error: function(err) {
          console.log(err);
@@ -41,39 +43,18 @@ class Home extends Component {
    })
  }
 
- handePageChange(pageNumber) {
-   this.setState({content: [], loading: true, activePage: pageNumber, start: 10, display: this.state.display + this.state.pageItems })
-   console.log('content after set state before second loop', this.state.content);
-   for (let i = this.state.start; i <= this.state.display; i++) {
-     console.log('i in loop in page change', i);
-     this.state.content.push(<img key={i} src={this.state.gifs[i].media[0].gif.url}/>)
+   handePageChange(pageNumber) {
+     this.setState({ activePage: pageNumber })
    }
-   console.log('content after loop', this.state.content);
-   this.setState({ loading: false })
-
- }
-
- componentWillUpdate() {
-   console.log('componentWillUpdate');
-   console.log('content in willUpdate', this.state.content);
- }
-
- componentDidUpdate() {
-   console.log('componentDidUpdate');
-   console.log('content in didUpdate', this.state.content);
- }
 
   render() {
-
     if(this.state.loading) {
       return <div className="loader">...Loading</div>
     }
 
     return (
-      <div>
-        <h1> Welcome Home </h1>
+      <div className="text-center">
         {this.state.activePage == 1 ? <div> {this.state.content1} </div> : <div> {this.state.content2} </div>}
-
 
         <Pagination
           activePage={this.state.activePage}

@@ -57,8 +57,8 @@ body {
 .loader,
 .loader:after {
     border-radius: 50%;
-    width: 10em;
-    height: 10em;
+    width: 30em;
+    height: 30em;
 }
 
 .loader {

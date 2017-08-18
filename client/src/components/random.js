@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 
-
 class Random extends Component {
   constructor() {
     super()
@@ -32,10 +31,9 @@ class Random extends Component {
     if(this.state.loading) {
         return <div className="loader">...Loading</div>
       }
-      
+
     return (
-      <div>
-        <h1> Welcome Random </h1>
+      <div className="text-center">
         <img src={this.state.gif} />
       </div>
     )

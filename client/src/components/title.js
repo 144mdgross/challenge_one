@@ -1,6 +1,6 @@
 import React from 'react';
 
-let cssClass = `header clearfix`
+let cssClass = `header clearfix text-center`
 
 const Title = () => {
   return (

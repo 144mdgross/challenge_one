@@ -1,18 +1,13 @@
 const express = require('express')
 const path = require('path');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 
 const app = express()
-
-//allows react front end to reqest w/o cors issues b/c of proxy
-app.use(cors())
 
 app.use(bodyParser.json());
 
 const gifs = require('./routes/gifs')
-const random = require('./routes/random')
-
+const random = require('./routes/random-endpoint')
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
@@ -49,7 +44,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send(err);
 });
-
 
 app.listen(port, function () {
   console.log(`Full Stack - JavaScript listening on port ${port}!`)
