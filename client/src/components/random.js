@@ -29,6 +29,10 @@ class Random extends Component {
  }
 
   render() {
+    if(this.state.loading) {
+        return <div className="loader">...Loading</div>
+      }
+      
     return (
       <div>
         <h1> Welcome Random </h1>
