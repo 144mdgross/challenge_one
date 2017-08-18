@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
   fetch(`https://api.tenor.com/v1/trending?key=${process.env.TENOR_API_KEY}`)
     .then(resp => resp.json())
     .then(body => {
-      console.log(body);
+
       let gifs = body.results
       res.json({ gifs })
     })

@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
+//NOTE: uses NavLink to get active button feature based on url
 const Button = () => {
   return (
     <div className="row">

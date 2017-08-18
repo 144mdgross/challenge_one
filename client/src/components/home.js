@@ -29,9 +29,9 @@ class Home extends Component {
 
          for (let i = 0; i < result.gifs.length; i++) {
            if(i < this.state.pageItems) {
-             content1.push(<img key={i} src={result.gifs[i].media[0].gif.url}/>)
+             content1.push(<img key={i} src={result.gifs[i].media[0].gif.url} alt={result.gifs[i].title}/>)
            } else {
-             content2.push(<img key={i} src={result.gifs[i].media[0].gif.url}/>)
+             content2.push(<img key={i} src={result.gifs[i].media[0].gif.url} alt={result.gifs[i].title}/>)
            }
           }
           // set state in success to have access to result object in success function
@@ -54,7 +54,7 @@ class Home extends Component {
 
     return (
       <div className="text-center">
-        {this.state.activePage == 1 ? <div> {this.state.content1} </div> : <div> {this.state.content2} </div>}
+        {this.state.activePage === 1 ? <div> {this.state.content1} </div> : <div> {this.state.content2} </div>}
 
         <Pagination
           activePage={this.state.activePage}

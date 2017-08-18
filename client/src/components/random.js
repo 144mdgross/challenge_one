@@ -34,7 +34,7 @@ class Random extends Component {
 
     return (
       <div className="text-center">
-        <img src={this.state.gif} />
+        <img src={this.state.gif} alt={this.state.gif.title}/>
       </div>
     )
   }

@@ -24,7 +24,7 @@ app.use('*', function(req, res, next) {
 })
 
 // changes port to 3002 to avoid conflict with create-react-app
-// see proxy in package.json for react app
+// see proxy in client side package.json
 const port = process.env.PORT || 3002
 
 // catch 404 and forward to error handler
